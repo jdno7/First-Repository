@@ -17,10 +17,17 @@ startBtn.addEventListener('click', function(e){
   gameScore.innerText = `Your Score = ${score}`; 
   if (startBtn.innerText === 'RE-START'){
       window.location.reload();
-      document.body.append(gameScore);
-      gameScore.innerText = `Game Score = ${score}`;
-  } 
-  })
+      
+        let bestScore = localStorage.getItem('bestScore')
+        parseInt(bestScore);
+        document.querySelector('#bestscore').innerText = `Best Score = ${bestScore}`;
+        document.body.append(gameScore);
+        gameScore.innerText = `Your Score = ${score}`; 
+      // document.body.append(gameScore);
+      // gameScore.innerText = `Game Score = ${score}`;
+      
+  } })
+  
 
 const COLORS = [
   "red",
@@ -81,56 +88,78 @@ function createDivsForColors(colorArray) {
 
 
 function handleCardClick(event) {
+
+ 
   
-  if (match.length === 2){
-    // console.log('return');
-    return;
-  }
-  
+
   if (match.length < 2){
     score++;
     gameScore.innerText = `Game Score = ${score}`;
-    console.log(score);
     match.unshift(event.target.className);
     event.target.style.pointerEvents = 'none';
     event.target.style.backgroundColor = event.target.className;
-    
-  }
-  console.log(match);
-
-  if (match[0] === match [1]){
-    let matched = document.querySelectorAll(`.${match[0]}`)
-    matched.forEach(card => card.id = ('matched'));
-    match.length = 0;
-      let cards =  document.querySelectorAll('#matched');
-      if(cards.length === COLORS.length) {
-       
-        gameComplete();
-        
-        
-      }
-    return;
-  }
-  
- 
-  
-  setTimeout (function(){
-
     if (match[0] === match [1]){
       let matched = document.querySelectorAll(`.${match[0]}`)
       matched.forEach(card => card.id = ('matched'));
-      match.length = 0;
-      let cards =  document.querySelectorAll('#matched');
-      if(cards.length === COLORS.length) {
-        gameComplete();
-      }
-      return;
-      
+      // match.length = 0;
+        let cards =  document.querySelectorAll('#matched');
+        if(cards.length === COLORS.length) {
+         
+          gameComplete();
+          
+          
+        }
+        
+      // return;
     }
+  }
+  
+ 
 
+
+  
+  
+  
+
+
+
+  // if (match[0] === match [1]){
+  //   let matched = document.querySelectorAll(`.${match[0]}`)
+  //   matched.forEach(card => card.id = ('matched'));
+  //   match.pop();
+  //     let cards =  document.querySelectorAll('#matched');
+  //     if(cards.length === COLORS.length) {
+       
+  //       gameComplete();
+        
+        
+  //     }
+      
+  //   return;
+  // }
+  
+ console.log(match);
+  
+  setTimeout (function(){
+
+    // if (match[0] === match [1]){
+    //   let matched = document.querySelectorAll(`.${match[0]}`)
+    //   matched.forEach(card => card.id = ('matched'));
+    //   // match.length = 0;
+    //   let cards =  document.querySelectorAll('#matched');
+    //   if(cards.length === COLORS.length) {
+    //     gameComplete();
+    //   }
+    //   match.length = 0;
+    //   return;
+     
+    // }
+    if (event.target.id === 'unmatched'){
           event.target.style.removeProperty('background-color') ;
           event.target.style.removeProperty('pointer-events') ;
-          match.pop();
+          
+  }
+  match.pop();
           // console.log(match);
   
 },2000)
